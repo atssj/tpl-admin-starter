@@ -1,26 +1,16 @@
-import { Auth } from "better-auth";
-import { PrismaAdapter } from "better-auth/adapter-prisma";
-import { prisma } from "@repo/db";
-import { EmailProvider } from "better-auth/providers";
+import { BetterAuth } from "better-auth";
+import { PrismaAdapter } from "better-auth/adapters/prisma";
+import { PrismaClient } from "@prisma/client";
+import { emailProvider } from "better-auth/providers/email";
 
-// Note: In a real-world app, you'd want to configure the email provider
-// to send actual emails for password resets, etc.
-// For this minimalistic example, we'll keep it simple.
+const db = new PrismaClient();
 
-export const auth = new Auth({
-  adapter: new PrismaAdapter(prisma),
-  session: {
-    strategy: "cookie", // Using secure, HTTP-only cookies
-  },
+export const auth = new BetterAuth({
+  adapter: new PrismaAdapter(db),
   providers: [
-    EmailProvider({
-      // This is a simple, non-emailing password provider.
-      // It allows sign-in with email and password.
-      from: "noreply@example.com", // Dummy from address
-      sendVerificationRequest: async () => {}, // No-op for this example
-      sendPasswordResetEmail: async () => {}, // No-op for this example
+    emailProvider({
+      // You can add email verification logic here if needed
     }),
   ],
-  secret: process.env.AUTH_SECRET,
-  basePath: "/api/auth",
+  // You can add additional configuration here
 });
