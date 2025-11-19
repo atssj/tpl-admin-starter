@@ -1,17 +1,16 @@
 {
-  "name": "minimalistic-admin-monorepo",
+  "name": "admin-monorepo",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:push": "bun --cwd packages/db run db:push",
-    "db:studio": "bun --cwd packages/db run db:studio"
+    "db:push": "bun --filter db run db:push"
   },
   "devDependencies": {
-    "prettier": "latest",
-    "turbo": "latest"
+    "prettier": "^3.2.5",
+    "turbo": "^1.11.3"
   },
   "packageManager": "bun@1.0.0",
   "workspaces": [
