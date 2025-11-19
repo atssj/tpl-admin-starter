@@ -1,0 +1,21 @@
+{
+  "name": "minimalistic-admin-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:push": "bun --cwd packages/db run db:push",
+    "db:studio": "bun --cwd packages/db run db:studio"
+  },
+  "devDependencies": {
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "packageManager": "bun@1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
